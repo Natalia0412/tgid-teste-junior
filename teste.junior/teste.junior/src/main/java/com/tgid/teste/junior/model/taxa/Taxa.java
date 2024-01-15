@@ -2,20 +2,19 @@ package com.tgid.teste.junior.model.taxa;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
-
-import java.util.UUID;
 @Data
 @Entity
-@Table(name= "TB_TAXA")
+@Table(name= "TB_TAXA", schema = "public")
 public class Taxa {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name= "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
+    private String tipo;
+    @Column
+    private double valor;
+//    @ManyToOne
+//    @JoinColumn(name = "empresa_id")
+//    private Empresa empresa;
 
 }

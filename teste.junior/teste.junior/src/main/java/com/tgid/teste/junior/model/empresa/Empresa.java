@@ -2,23 +2,23 @@ package com.tgid.teste.junior.model.empresa;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
-
-import java.util.UUID;
 @Data
 @Entity
-@Table(name = "TB_EMPRESA")
+@Table(name = "TB_EMPRESA", schema = "public")
 public class Empresa {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name= "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
     private String cnpj;
+    @Column(nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private double saldo;
+//    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+//    private List<Taxa> taxas = new ArrayList<>();
+//    @ManyToMany(mappedBy = "empresas")
+//    private List<Cliente> clientes;
 }

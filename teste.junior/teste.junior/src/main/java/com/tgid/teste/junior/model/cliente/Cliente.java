@@ -2,23 +2,23 @@ package com.tgid.teste.junior.model.cliente;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
-
-import java.util.UUID;
 @Data
 @Entity
-@Table(name= "TB_CLIENTE")
+@Table(name= "TB_CLIENTE", schema = "public")
 public class Cliente {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name= "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
     private String cpf;
+    @Column
+    private String email;
+//    @ManyToMany
+//    @JoinTable(name= "cliente_empresa",
+//            joinColumns = @JoinColumn(name = "cliente_id"),
+//            inverseJoinColumns = @JoinColumn(name = "empresa_id"))
+//    private List<Empresa> empresas;
+
 }
