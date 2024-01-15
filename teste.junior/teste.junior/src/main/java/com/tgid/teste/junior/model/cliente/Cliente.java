@@ -13,7 +13,7 @@ public class Cliente {
     private String nome;
     @Column(nullable = false)
     private String cpf;
-    @Column
+    @Column(nullable = false)
     private String email;
 //    @ManyToMany
 //    @JoinTable(name= "cliente_empresa",
