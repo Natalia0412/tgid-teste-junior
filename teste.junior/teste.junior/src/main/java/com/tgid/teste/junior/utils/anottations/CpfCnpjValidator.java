@@ -7,12 +7,17 @@ public class CpfCnpjValidator implements ConstraintValidator<CpfCnpj, String> {
 
     @Override
     public void initialize(CpfCnpj constraintAnnotation) {
-        ConstraintValidator.super.initialize(constraintAnnotation);
+
     }
 
     @Override
     public boolean isValid(String n, ConstraintValidatorContext constraintValidatorContext) {
-        return validarCpfCnpj(n);
+        String numericos = removerNaoNumerico(n);
+        return validarCpfCnpj(numericos);
+    }
+
+    private static String removerNaoNumerico(String input) {
+        return input.replaceAll("[^0-9]", "");
     }
 
     private boolean validarCpfCnpj(String n) {

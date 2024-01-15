@@ -3,12 +3,10 @@ package com.tgid.teste.junior.utils.anottations;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
-@Target(ElementType.FIELD)
+@Documented
+@Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = CpfCnpjValidator.class)
 public @interface CpfCnpj {
