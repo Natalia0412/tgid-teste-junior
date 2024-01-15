@@ -9,30 +9,45 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestControllerAdvice
 public class RestControllerAdviceHandler {
     @ExceptionHandler(ResourceConflict.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
-    public RespondMsg resourceBadRequestException(ResourceConflict ex, HttpServletRequest request) {
-        String error = "Conflict";
+    public RespondErrorMsg resourceConflictException(ResourceConflict ex, HttpServletRequest request) {
         HttpStatus status = HttpStatus.CONFLICT;
-        RespondMsg err1 = new RespondMsg(Instant.now(), status.value(),error, ex.getMessage(), request.getRequestURI());
+        RespondErrorMsg err1 = RespondErrorMsg.builder()
+                .timestamp(Instant.now())
+                .status(status.value())
+                .errors(List.of(ErrorMsg.builder().message(ex.getMessage()).build()))
+                .path(request.getRequestURI())
+                .build();
         return err1;
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
+    public RespondErrorMsg handleValidationExceptions(
+            MethodArgumentNotValidException ex,
+            HttpServletRequest request) {
+        List<ErrorMsg> errorMsgs = new ArrayList<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
+            ErrorMsg errorMsg = ErrorMsg.builder()
+                    .field(((FieldError) error).getField())
+                    .message(error.getDefaultMessage())
+                    .build();
+            errorMsgs.add(errorMsg);
         });
-        return errors;
+
+        return RespondErrorMsg.builder()
+                .timestamp(Instant.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .errors(errorMsgs)
+                .path(request.getRequestURI())
+                .build();
     }
 }

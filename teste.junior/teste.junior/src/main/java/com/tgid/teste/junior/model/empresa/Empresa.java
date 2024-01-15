@@ -16,7 +16,7 @@ public class Empresa {
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
-    private double saldo;
+    private Double saldo;
 //    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 //    private List<Taxa> taxas = new ArrayList<>();
 //    @ManyToMany(mappedBy = "empresas")

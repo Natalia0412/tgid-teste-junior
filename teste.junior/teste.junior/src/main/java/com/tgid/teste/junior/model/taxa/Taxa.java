@@ -12,7 +12,7 @@ public class Taxa {
     @Column
     private String tipo;
     @Column
-    private double valor;
+    private Double valor;
 //    @ManyToOne
 //    @JoinColumn(name = "empresa_id")
 //    private Empresa empresa;

@@ -8,9 +8,9 @@ import java.lang.annotation.*;
 @Documented
 @Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = CpfCnpjValidator.class)
-public @interface CpfCnpj {
-    String message() default "Documento inválido";
+@Constraint(validatedBy = CpfValidator.class)
+public @interface Cpf {
+    String message() default "CPF inválido";
 
     Class<?>[] groups() default {};
 
