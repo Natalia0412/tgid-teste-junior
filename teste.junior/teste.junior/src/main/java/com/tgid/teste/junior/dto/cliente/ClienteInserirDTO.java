@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 public class ClienteInserirDTO {
@@ -22,4 +24,5 @@ public class ClienteInserirDTO {
     @NotBlank(message = "O email não pode estar em branco")
     @Email(message = "Formato de e-mail inválido")
     private String email;
+    private List<Long> empresas;
 }

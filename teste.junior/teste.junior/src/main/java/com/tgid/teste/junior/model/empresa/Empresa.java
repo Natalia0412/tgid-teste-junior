@@ -1,10 +1,20 @@
 package com.tgid.teste.junior.model.empresa;
 
+import com.tgid.teste.junior.model.taxa.Taxa;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
 @Data
+@Builder
 @Entity
 @Table(name = "TB_EMPRESA", schema = "public")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +27,6 @@ public class Empresa {
     private String email;
     @Column(nullable = false)
     private Double saldo;
-//    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
-//    private List<Taxa> taxas = new ArrayList<>();
-//    @ManyToMany(mappedBy = "empresas")
-//    private List<Cliente> clientes;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Taxa> taxaList;
 }

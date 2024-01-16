@@ -3,22 +3,29 @@ package com.tgid.teste.junior.utils.mapper.cliente;
 import com.tgid.teste.junior.dto.cliente.ClienteInserirDTO;
 import com.tgid.teste.junior.dto.cliente.ClienteRespostaDTO;
 import com.tgid.teste.junior.model.cliente.Cliente;
+import com.tgid.teste.junior.model.empresa.Empresa;
+
+import java.util.stream.Collectors;
 
 public class ClienteMapper {
     public static Cliente clienteDTOParaCliente(ClienteInserirDTO dto) {
-        Cliente cliente = new Cliente();
-        cliente.setNome(dto.getNome());
-        cliente.setCpf(dto.getCpf());
-        cliente.setEmail(dto.getEmail());
-        return cliente;
+        return Cliente.builder()
+                .nome(dto.getNome())
+                .cpf(dto.getCpf())
+                .email(dto.getEmail())
+                .build();
     }
 
     public static ClienteRespostaDTO clienteParaClienteRespostaDTO(Cliente cliente){
-        ClienteRespostaDTO dto= new ClienteRespostaDTO();
-        dto.setNome(cliente.getNome());
-        dto.setCpf(cliente.getCpf());
-        dto.setEmail(cliente.getEmail());
-        return dto;
+        return ClienteRespostaDTO.builder()
+                .id(cliente.getId())
+                .nome(cliente.getNome())
+                .cpf(cliente.getCpf())
+                .email(cliente.getEmail())
+                .empresas(cliente.getEmpresas().stream().map(Empresa::getId).collect(Collectors.toList()))
+                .build();
     }
+
+
 
 }

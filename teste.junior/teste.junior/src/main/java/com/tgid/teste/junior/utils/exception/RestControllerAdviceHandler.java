@@ -16,10 +16,36 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class RestControllerAdviceHandler {
+
     @ExceptionHandler(ResourceConflict.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     public RespondErrorMsg resourceConflictException(ResourceConflict ex, HttpServletRequest request) {
         HttpStatus status = HttpStatus.CONFLICT;
+        RespondErrorMsg err1 = RespondErrorMsg.builder()
+                .timestamp(Instant.now())
+                .status(status.value())
+                .errors(List.of(ErrorMsg.builder().message(ex.getMessage()).build()))
+                .path(request.getRequestURI())
+                .build();
+        return err1;
+    }
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public RespondErrorMsg resourceNotFoundException(ResourceNotFoundException ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        RespondErrorMsg err1 = RespondErrorMsg.builder()
+                .timestamp(Instant.now())
+                .status(status.value())
+                .errors(List.of(ErrorMsg.builder().message(ex.getMessage()).build()))
+                .path(request.getRequestURI())
+                .build();
+        return err1;
+    }
+
+    @ExceptionHandler(InsufficientBalanceException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public RespondErrorMsg insufficientBalanceException(InsufficientBalanceException ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         RespondErrorMsg err1 = RespondErrorMsg.builder()
                 .timestamp(Instant.now())
                 .status(status.value())
