@@ -5,6 +5,8 @@ import com.tgid.teste.junior.dto.cliente.ClienteRespostaDTO;
 import com.tgid.teste.junior.model.cliente.Cliente;
 import com.tgid.teste.junior.model.empresa.Empresa;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ClienteMapper {
@@ -14,6 +16,14 @@ public class ClienteMapper {
                 .cpf(dto.getCpf())
                 .email(dto.getEmail())
                 .build();
+    }
+
+    public static List<ClienteRespostaDTO> clienteParaClienteRespostaDTO(List<Cliente> clientes){
+        List<ClienteRespostaDTO> dto = new ArrayList<>();
+        clientes.forEach(cliente -> {
+            dto.add(clienteParaClienteRespostaDTO(cliente));
+        });
+        return dto;
     }
 
     public static ClienteRespostaDTO clienteParaClienteRespostaDTO(Cliente cliente){

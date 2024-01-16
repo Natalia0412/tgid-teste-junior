@@ -79,7 +79,7 @@ public class EmpresaService {
         if (empresa.getSaldo() >= dto.getValor()) {
             empresa.setSaldo(empresa.getSaldo() - dto.getValor());
 
-            // Atualiza o saldo no banco de dados
+
             return empresaRepository.save(empresa);
         } else {
             throw new InsufficientBalanceException("Saldo insuficiente para realizar o saque");
@@ -94,8 +94,10 @@ public class EmpresaService {
         return EmpresaMapper.empresaParaEmpresaRespostaDTO(empresa);
     }
 
-    public List<Empresa> listarTodasEmpresas(){
-        return empresaRepository.findAll();
+
+    public List<EmpresaRespostaDTO> listarTodasEmpresas(){
+
+        return EmpresaMapper.empresaParaEmpresaRespostaDTO(empresaRepository.findAll());
     }
 
 

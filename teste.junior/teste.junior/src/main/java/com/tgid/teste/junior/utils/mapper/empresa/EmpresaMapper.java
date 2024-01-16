@@ -6,6 +6,7 @@ import com.tgid.teste.junior.model.empresa.Empresa;
 import com.tgid.teste.junior.utils.mapper.taxa.TaxaMapper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EmpresaMapper {
 
@@ -28,6 +29,13 @@ public class EmpresaMapper {
                 .saldo(dto.getSaldo())
                 .taxaList(TaxaMapper.taxaDTOParaTaxa(dto.getTaxas()))
                 .build();
+    }
+    public static List<EmpresaRespostaDTO> empresaParaEmpresaRespostaDTO(List<Empresa> empresas){
+        List<EmpresaRespostaDTO> empresaRespostaDTOS = new ArrayList<>();
+        empresas.forEach(empresa -> {
+            empresaRespostaDTOS.add(empresaParaEmpresaRespostaDTO(empresa));
+        });
+        return empresaRespostaDTOS;
     }
 
     public static EmpresaRespostaDTO empresaParaEmpresaRespostaDTO(Empresa empresa){

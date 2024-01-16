@@ -30,8 +30,10 @@ public class EmpresaController {
         return ResponseEntity.status(HttpStatus.OK).body(dtoRes);
     }
 
+
+
     @GetMapping()
-    public ResponseEntity<List<Empresa>> buscarEmpresas() {
+    public ResponseEntity<List<EmpresaRespostaDTO>> buscarEmpresas() {
         return ResponseEntity.status(HttpStatus.OK).body(empresaService.listarTodasEmpresas());
     }
 

@@ -30,8 +30,10 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.OK).body(clienteRespostaDTO);
     }
 
+
+
     @GetMapping()
-    public ResponseEntity<List<Cliente>> mostrarCliente() {
+    public ResponseEntity<List<ClienteRespostaDTO>> mostrarCliente() {
         return ResponseEntity.status(HttpStatus.OK).body(clienteService.trazerTodosClientes());
     }
 

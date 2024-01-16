@@ -66,8 +66,10 @@ public class ClienteService {
         return ClienteMapper.clienteParaClienteRespostaDTO(cliente);
     }
 
-    public List<Cliente> trazerTodosClientes(){
-        return clienteRepository.findAll();
+
+
+    public List<ClienteRespostaDTO> trazerTodosClientes(){
+        return ClienteMapper.clienteParaClienteRespostaDTO(clienteRepository.findAll());
     }
 
 }
