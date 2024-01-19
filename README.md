@@ -8,6 +8,8 @@
 ### Endpoints
 - http://localhost:8080/api/v1/cliente
 - http://localhost:8080/api/v1/empresa
+- http://localhost:8080/api/v1/empresa/{empresaId}/depositar
+- http://localhost:8080/api/v1/empresa/{empresaId}/sacar
 - http://localhost:8080/api/v1/taxa
   
 Cada um deles tem POST,GET e GET para consultar ID
